@@ -741,8 +741,9 @@
 <i class="fa-solid fa-diamond-turn-right text-xs"></i>
 <span>Get Directions</span>
 </a>
-<button class="py-2.5 px-4 rounded-lg bg-stone-100 text-coffee hover:bg-stone-200 font-cinzel text-xs font-semibold tracking-wider transition-colors" onclick="downloadCalendarInvite('Traditional Wedding: Peace &amp; Emmanuel', 'Custom Staff School, Ashton Road Opposite Kabo Guest Inn, Kano State', '2026-11-27T14:00:00')" title="Add to Calendar">
-<i class="fa-regular fa-calendar-plus"></i>
+<button class="py-2.5 px-4 rounded-lg bg-[#FAF1E8] text-coffee hover:bg-coffee hover:text-white font-cinzel text-xs font-semibold tracking-wider transition-all border border-coffee/20 flex items-center justify-center space-x-2 active:scale-95 shadow-sm" onclick="openCalendarModal('traditional')" title="Add Traditional Wedding to Calendar">
+<i class="fa-regular fa-calendar-plus text-rosegold"></i>
+<span>Add to Calendar</span>
 </button>
 </div>
 </article>
@@ -795,8 +796,9 @@
 <i class="fa-solid fa-diamond-turn-right text-xs"></i>
 <span>Get Directions</span>
 </a>
-<button class="py-2.5 px-4 rounded-lg bg-stone-100 text-olive hover:bg-stone-200 font-cinzel text-xs font-semibold tracking-wider transition-colors" onclick="downloadCalendarInvite('Church Wedding: Peace &amp; Emmanuel', 'United Evangelical Church HQ, No 42 Onitsha Road, Sabon Gari, Kano', '2026-11-28T10:00:00')" title="Add to Calendar">
-<i class="fa-regular fa-calendar-plus"></i>
+<button class="py-2.5 px-4 rounded-lg bg-[#EFF5ED] text-olive hover:bg-olive hover:text-white font-cinzel text-xs font-semibold tracking-wider transition-all border border-olive/20 flex items-center justify-center space-x-2 active:scale-95 shadow-sm" onclick="openCalendarModal('church')" title="Add Church Wedding to Calendar">
+<i class="fa-regular fa-calendar-plus text-olive"></i>
+<span>Add to Calendar</span>
 </button>
 </div>
 </article>
@@ -841,10 +843,14 @@
 </div>
 </div>
 <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
-<a class="px-8 py-3 rounded-full bg-gold-foil text-coffee-dark font-cinzel text-xs md:text-sm font-bold tracking-widest hover:bg-gold-light transition-all shadow-lg" href="https://maps.google.com/?q=Nitel+Training+School+Katsina+Road+Kano" rel="noopener noreferrer" target="_blank">
+<a class="px-7 py-3 rounded-full bg-gold-foil text-coffee-dark font-cinzel text-xs md:text-sm font-bold tracking-widest hover:bg-gold-light transition-all shadow-lg flex items-center justify-center" href="https://maps.google.com/?q=Nitel+Training+School+Katsina+Road+Kano" rel="noopener noreferrer" target="_blank">
 <i class="fa-solid fa-location-arrow mr-2"></i> RECEPTION MAP
           </a>
-<a class="px-8 py-3 rounded-full bg-transparent border-2 border-gold-foil text-white font-cinzel text-xs md:text-sm font-bold tracking-widest hover:bg-gold-foil/20 transition-all" href="#rsvp-section">
+<button class="px-7 py-3 rounded-full bg-coffee/90 border border-gold-foil/50 text-gold-shimmer font-cinzel text-xs md:text-sm font-bold tracking-widest hover:bg-coffee hover:border-gold-light transition-all shadow-md flex items-center justify-center space-x-2 active:scale-95" onclick="openCalendarModal('reception')">
+<i class="fa-regular fa-calendar-plus text-gold-shimmer"></i>
+<span>ADD TO CALENDAR</span>
+</button>
+<a class="px-7 py-3 rounded-full bg-transparent border-2 border-gold-foil text-white font-cinzel text-xs md:text-sm font-bold tracking-widest hover:bg-gold-foil/20 transition-all flex items-center justify-center" href="#rsvp-section">
             RSVP FOR RECEPTION
           </a>
 </div>
@@ -903,10 +909,16 @@
           </div>
 </div>
 </div>
-<!-- Target Reference Note -->
+<!-- Target Reference Note & Calendar CTA -->
 <div class="mt-8 text-stone-500 font-cinzel text-xs tracking-widest">
         TARGET DATE: NOVEMBER 27, 2026 • 2:00 PM WAT
       </div>
+<div class="mt-5 flex justify-center">
+<button class="px-6 py-2.5 rounded-full bg-white border border-gold-foil/70 text-coffee hover:bg-olive hover:text-white hover:border-olive shadow-sm font-cinzel text-xs tracking-widest font-semibold transition-all flex items-center space-x-2 active:scale-95" onclick="openCalendarModal('all')">
+<i class="fa-regular fa-calendar-check text-rosegold"></i>
+<span>ADD WEDDING DATES TO CALENDAR</span>
+</button>
+</div>
 </div>
 </section>
 <!-- END: Section E - Live Wedding Countdown -->
@@ -1120,6 +1132,99 @@
 </footer>
 </main>
 <!-- END: Main Footer Section -->
+
+<!-- ============================================== -->
+<!-- LUXURY ADD TO CALENDAR MODAL -->
+<!-- ============================================== -->
+<div id="calendarModal" class="fixed inset-0 z-[150] hidden items-center justify-center p-4 bg-black/60 backdrop-blur-sm transition-opacity duration-300" onclick="handleCalendarBackdropClick(event)">
+  <div class="relative w-full max-w-lg bg-white rounded-3xl p-6 md:p-8 shadow-2xl border-2 border-gold-foil text-center transform transition-all duration-300 scale-95 opacity-0 paper-texture" id="calendarModalContent">
+    <!-- Close Button -->
+    <button onclick="closeCalendarModal()" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-stone-100 hover:bg-stone-200 text-stone-600 flex items-center justify-center transition-colors shadow-sm" title="Close Modal">
+      <i class="fa-solid fa-xmark text-sm"></i>
+    </button>
+
+    <!-- Modal Header Icon -->
+    <div class="w-14 h-14 rounded-full bg-blush mx-auto mb-3 flex items-center justify-center border-2 border-gold-foil/60 text-rosegold text-2xl shadow-md">
+      <i class="fa-regular fa-calendar-plus"></i>
+    </div>
+    
+    <p class="font-cinzel text-xs tracking-[0.3em] uppercase text-rosegold font-bold mb-1">
+      Save The Date
+    </p>
+    <h3 class="font-cinzel text-xl md:text-2xl text-coffee font-bold mb-2" id="calendarModalEventTitle">
+      Traditional Wedding
+    </h3>
+    <p class="font-cormorant italic text-sm md:text-base text-stone-600 mb-6" id="calendarModalEventDate">
+      Friday, 27th November, 2026 • 2:00 PM WAT
+    </p>
+
+    <!-- Calendar Services Options -->
+    <div class="space-y-3 mb-6">
+      <!-- Google Calendar -->
+      <a id="calBtnGoogle" href="#" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-3.5 rounded-2xl border border-stone-200 hover:border-gold-foil hover:bg-[#FAF8F5] transition-all group shadow-sm bg-white" onclick="recordCalendarChoice('Google Calendar')">
+        <div class="flex items-center space-x-3.5">
+          <div class="w-10 h-10 rounded-xl bg-red-50 flex items-center justify-center text-red-500 text-lg border border-red-100">
+            <i class="fa-brands fa-google"></i>
+          </div>
+          <div class="text-left">
+            <div class="font-cinzel text-xs md:text-sm font-bold text-stone-800 group-hover:text-olive">Google Calendar</div>
+            <div class="text-[11px] font-sans text-stone-500">Android, Browser &amp; Google App</div>
+          </div>
+        </div>
+        <i class="fa-solid fa-arrow-up-right-from-square text-stone-400 group-hover:text-gold-foil text-xs mr-2"></i>
+      </a>
+
+      <!-- Apple Calendar / iCal -->
+      <button id="calBtnApple" onclick="handleAppleCalendarClick()" class="w-full flex items-center justify-between p-3.5 rounded-2xl border border-stone-200 hover:border-gold-foil hover:bg-[#FAF8F5] transition-all group shadow-sm bg-white">
+        <div class="flex items-center space-x-3.5">
+          <div class="w-10 h-10 rounded-xl bg-stone-100 flex items-center justify-center text-stone-800 text-lg border border-stone-200">
+            <i class="fa-brands fa-apple"></i>
+          </div>
+          <div class="text-left">
+            <div class="font-cinzel text-xs md:text-sm font-bold text-stone-800 group-hover:text-olive">Apple Calendar</div>
+            <div class="text-[11px] font-sans text-stone-500">iPhone, iPad &amp; Mac (iCal)</div>
+          </div>
+        </div>
+        <i class="fa-solid fa-download text-stone-400 group-hover:text-gold-foil text-xs mr-2"></i>
+      </button>
+
+      <!-- Outlook / Microsoft -->
+      <a id="calBtnOutlook" href="#" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-3.5 rounded-2xl border border-stone-200 hover:border-gold-foil hover:bg-[#FAF8F5] transition-all group shadow-sm bg-white" onclick="recordCalendarChoice('Outlook')">
+        <div class="flex items-center space-x-3.5">
+          <div class="w-10 h-10 rounded-xl bg-sky-50 flex items-center justify-center text-sky-600 text-lg border border-sky-100">
+            <i class="fa-brands fa-microsoft"></i>
+          </div>
+          <div class="text-left">
+            <div class="font-cinzel text-xs md:text-sm font-bold text-stone-800 group-hover:text-olive">Outlook / Office 365</div>
+            <div class="text-[11px] font-sans text-stone-500">Outlook Web &amp; Microsoft 365</div>
+          </div>
+        </div>
+        <i class="fa-solid fa-arrow-up-right-from-square text-stone-400 group-hover:text-gold-foil text-xs mr-2"></i>
+      </a>
+
+      <!-- Yahoo Calendar -->
+      <a id="calBtnYahoo" href="#" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-3.5 rounded-2xl border border-stone-200 hover:border-gold-foil hover:bg-[#FAF8F5] transition-all group shadow-sm bg-white" onclick="recordCalendarChoice('Yahoo')">
+        <div class="flex items-center space-x-3.5">
+          <div class="w-10 h-10 rounded-xl bg-purple-50 flex items-center justify-center text-purple-600 text-lg border border-purple-100">
+            <i class="fa-brands fa-yahoo"></i>
+          </div>
+          <div class="text-left">
+            <div class="font-cinzel text-xs md:text-sm font-bold text-stone-800 group-hover:text-olive">Yahoo Calendar</div>
+            <div class="text-[11px] font-sans text-stone-500">Yahoo Mail &amp; Calendar</div>
+          </div>
+        </div>
+        <i class="fa-solid fa-arrow-up-right-from-square text-stone-400 group-hover:text-gold-foil text-xs mr-2"></i>
+      </a>
+    </div>
+
+    <!-- Direct .ICS Download Link -->
+    <div class="pt-3 border-t border-stone-200 text-center">
+      <button onclick="handleIcsDirectDownload()" class="font-cinzel text-xs tracking-wider text-stone-600 hover:text-olive uppercase font-semibold underline underline-offset-4 transition-colors">
+        <i class="fa-solid fa-file-arrow-down mr-1 text-rosegold"></i> Download .ICS Calendar File
+      </button>
+    </div>
+  </div>
+</div>
 <!-- BEGIN: Interactive Logic & Countdown Scripts -->
 <script data-purpose="countdown-and-rsvp-logic">
     // --- 1. Target Wedding Countdown (Nov 27, 2026, 14:00 WAT) ---
@@ -1163,31 +1268,221 @@
       successMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
 
-    // --- 3. Calendar Invite .ICS Generator ---
-    function downloadCalendarInvite(eventTitle, eventLocation, isoDateString) {
-      const startTime = isoDateString.replace(/-|:|\.\d\d\d/g,"");
-      const icsData = [
+    // --- 3. Comprehensive Multi-Platform Calendar Management ---
+    const WEDDING_EVENTS = {
+      traditional: {
+        id: "traditional",
+        name: "Traditional Wedding",
+        title: "Traditional Wedding: Peace & Emmanuel",
+        dateDisplay: "Friday, 27th November, 2026 • 2:00 PM WAT",
+        startISO: "2026-11-27T14:00:00",
+        endISO: "2026-11-27T18:00:00",
+        startUTC: "20261127T130000Z",
+        endUTC: "20261127T170000Z",
+        startLocal: "20261127T140000",
+        endLocal: "20261127T180000",
+        location: "Custom Staff School, Ashton Road, Opposite Kabo Guest Inn, Kano State, Nigeria",
+        description: "Traditional Wedding ceremony, marital blessing and bride price presentation celebrating Peace Ojochide Akor & Emmanuel Ojoche Omale."
+      },
+      church: {
+        id: "church",
+        name: "Holy Matrimony (Church Wedding)",
+        title: "Church Wedding: Peace & Emmanuel",
+        dateDisplay: "Saturday, 28th November, 2026 • 10:00 AM WAT",
+        startISO: "2026-11-28T10:00:00",
+        endISO: "2026-11-28T13:30:00",
+        startUTC: "20261128T090000Z",
+        endUTC: "20261128T123000Z",
+        startLocal: "20261128T100000",
+        endLocal: "20261128T133000",
+        location: "United Evangelical Church HQ, No 42 Onitsha Road, Sabon Gari, Kano State, Nigeria",
+        description: "Solemnization of Holy Matrimony, sacred vows and exchange of rings for Peace Ojochide Akor & Emmanuel Ojoche Omale."
+      },
+      reception: {
+        id: "reception",
+        name: "Grand Wedding Reception & Banquet",
+        title: "Wedding Reception: Peace & Emmanuel",
+        dateDisplay: "Saturday, 28th November, 2026 • 2:00 PM WAT",
+        startISO: "2026-11-28T14:00:00",
+        endISO: "2026-11-28T19:00:00",
+        startUTC: "20261128T130000Z",
+        endUTC: "20261128T180000Z",
+        startLocal: "20261128T140000",
+        endLocal: "20261128T190000",
+        location: "Nitel Training School (Formerly Digital Bridge), Katsina Road, Kano State, Nigeria",
+        description: "Grand wedding banquet, celebration, feast and dancing following Holy Matrimony for Peace & Emmanuel."
+      },
+      all: {
+        id: "all",
+        name: "The Royal Wedding Weekend (Full Celebrations)",
+        title: "The Royal Wedding: Peace & Emmanuel",
+        dateDisplay: "27th & 28th November, 2026 • Kano State",
+        startISO: "2026-11-27T14:00:00",
+        endISO: "2026-11-28T19:00:00",
+        startUTC: "20261127T130000Z",
+        endUTC: "20261128T180000Z",
+        startLocal: "20261127T140000",
+        endLocal: "20261128T190000",
+        location: "Kano State, Nigeria (Traditional: Custom Staff School; Church: UEC HQ; Reception: Nitel Training School)",
+        description: "Join us in celebrating the Holy Matrimony of Peace Ojochide Akor & Emmanuel Ojoche Omale in Kano State, Nigeria."
+      }
+    };
+
+    let currentCalendarEventKey = "traditional";
+
+    function openCalendarModal(eventKey) {
+      const ev = WEDDING_EVENTS[eventKey] || WEDDING_EVENTS.traditional;
+      currentCalendarEventKey = eventKey;
+
+      document.getElementById("calendarModalEventTitle").innerText = ev.name;
+      document.getElementById("calendarModalEventDate").innerText = ev.dateDisplay;
+
+      // Google Calendar Direct URL
+      const googleUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(ev.title)}&dates=${ev.startUTC}/${ev.endUTC}&details=${encodeURIComponent(ev.description)}&location=${encodeURIComponent(ev.location)}`;
+      document.getElementById("calBtnGoogle").href = googleUrl;
+
+      // Outlook Live URL
+      const outlookUrl = `https://outlook.live.com/calendar/0/deeplink/compose?path=/calendar/action/compose&rru=addevent&subject=${encodeURIComponent(ev.title)}&startdt=${encodeURIComponent(ev.startISO)}&enddt=${encodeURIComponent(ev.endISO)}&body=${encodeURIComponent(ev.description)}&location=${encodeURIComponent(ev.location)}`;
+      document.getElementById("calBtnOutlook").href = outlookUrl;
+
+      // Yahoo Calendar URL
+      const yahooUrl = `https://calendar.yahoo.com/?v=60&view=d&type=20&title=${encodeURIComponent(ev.title)}&st=${ev.startUTC}&et=${ev.endUTC}&desc=${encodeURIComponent(ev.description)}&in_loc=${encodeURIComponent(ev.location)}`;
+      document.getElementById("calBtnYahoo").href = yahooUrl;
+
+      // Display Modal with animation
+      const modal = document.getElementById("calendarModal");
+      const content = document.getElementById("calendarModalContent");
+      modal.classList.remove("hidden");
+      modal.classList.add("flex");
+
+      setTimeout(() => {
+        content.classList.remove("scale-95", "opacity-0");
+        content.classList.add("scale-100", "opacity-100");
+      }, 10);
+    }
+
+    function closeCalendarModal() {
+      const modal = document.getElementById("calendarModal");
+      const content = document.getElementById("calendarModalContent");
+      content.classList.remove("scale-100", "opacity-100");
+      content.classList.add("scale-95", "opacity-0");
+
+      setTimeout(() => {
+        modal.classList.remove("flex");
+        modal.classList.add("hidden");
+      }, 250);
+    }
+
+    function handleCalendarBackdropClick(event) {
+      if (event.target === document.getElementById("calendarModal")) {
+        closeCalendarModal();
+      }
+    }
+
+    // Keyboard accessibility: ESC closes modal
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        const modal = document.getElementById("calendarModal");
+        if (modal && !modal.classList.contains("hidden")) {
+          closeCalendarModal();
+        }
+      }
+    });
+
+    function recordCalendarChoice(platformName) {
+      // Small delay before auto closing to allow browser tab opening
+      setTimeout(() => {
+        closeCalendarModal();
+      }, 300);
+    }
+
+    function handleAppleCalendarClick() {
+      downloadIcsCalendar(currentCalendarEventKey);
+      recordCalendarChoice('Apple Calendar');
+    }
+
+    function handleIcsDirectDownload() {
+      downloadIcsCalendar(currentCalendarEventKey);
+      recordCalendarChoice('.ICS');
+    }
+
+    // RFC-5545 Compliant ICS Generator with WAT Timezone and Alarm Reminders
+    function downloadIcsCalendar(evKey) {
+      let eventsToInclude = [];
+      if (evKey === 'all') {
+        eventsToInclude = [WEDDING_EVENTS.traditional, WEDDING_EVENTS.church, WEDDING_EVENTS.reception];
+      } else if (WEDDING_EVENTS[evKey]) {
+        eventsToInclude = [WEDDING_EVENTS[evKey]];
+      } else {
+        eventsToInclude = [WEDDING_EVENTS.traditional];
+      }
+
+      const nowStr = new Date().toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
+
+      let icsLines = [
         "BEGIN:VCALENDAR",
         "VERSION:2.0",
         "PRODID:-//Peace and Emmanuel Wedding//EN",
-        "BEGIN:VEVENT",
-        `SUMMARY:${eventTitle}`,
-        `DESCRIPTION:Join us to celebrate the solemnization of Holy Matrimony between Peace and Emmanuel.`,
-        `LOCATION:${eventLocation}`,
-        `DTSTART:${startTime}`,
-        `DTEND:${startTime}`,
-        "STATUS:CONFIRMED",
-        "END:VEVENT",
-        "END:VCALENDAR"
-      ].join("\n");
+        "CALSCALE:GREGORIAN",
+        "METHOD:PUBLISH",
+        "X-WR-CALNAME:Peace & Emmanuel Wedding",
+        "X-WR-TIMEZONE:Africa/Lagos",
+        "BEGIN:VTIMEZONE",
+        "TZID:Africa/Lagos",
+        "BEGIN:STANDARD",
+        "DTSTART:19700101T000000",
+        "TZOFFSETFROM:+0100",
+        "TZOFFSETTO:+0100",
+        "TZNAME:WAT",
+        "END:STANDARD",
+        "END:VTIMEZONE"
+      ];
 
+      eventsToInclude.forEach((item, idx) => {
+        icsLines.push(
+          "BEGIN:VEVENT",
+          `UID:wedding-${item.id}-${Date.now()}-${idx}@peace-emmanuel.wedding`,
+          `DTSTAMP:${nowStr}`,
+          `DTSTART;TZID=Africa/Lagos:${item.startLocal}`,
+          `DTEND;TZID=Africa/Lagos:${item.endLocal}`,
+          `SUMMARY:${item.title}`,
+          `DESCRIPTION:${item.description}`,
+          `LOCATION:${item.location}`,
+          "STATUS:CONFIRMED",
+          "SEQUENCE:0",
+          "BEGIN:VALARM",
+          "TRIGGER:-P1D",
+          "ACTION:DISPLAY",
+          `DESCRIPTION:Reminder: ${item.title}`,
+          "END:VALARM",
+          "END:VEVENT"
+        );
+      });
+
+      icsLines.push("END:VCALENDAR");
+
+      const icsData = icsLines.join("\r\n");
       const blob = new Blob([icsData], { type: "text/calendar;charset=utf-8" });
       const link = document.createElement("a");
       link.href = window.URL.createObjectURL(blob);
-      link.setAttribute("download", `${eventTitle.replace(/[^a-zA-Z0-9]/g, "_")}.ics`);
+      const filename = evKey === 'all' 
+        ? 'Peace_and_Emmanuel_Wedding_Celebrations.ics' 
+        : `${WEDDING_EVENTS[evKey].title.replace(/[^a-zA-Z0-9]/g, "_")}.ics`;
+      link.setAttribute("download", filename);
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
+    }
+
+    // Backward compatibility helper
+    function downloadCalendarInvite(eventTitle, eventLocation, isoDateString) {
+      if (eventTitle.toLowerCase().includes("traditional")) {
+        openCalendarModal("traditional");
+      } else if (eventTitle.toLowerCase().includes("church")) {
+        openCalendarModal("church");
+      } else {
+        openCalendarModal("all");
+      }
     }
   </script>
 <script data-purpose="audio-and-visual-effects">
